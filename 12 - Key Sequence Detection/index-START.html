@@ -7,6 +7,23 @@
 </head>
 <body>
 <script>
+  window.addEventListener('keyup', checkForSeceretCode)
+
+  const keysPressed = [];
+  const seceretKey = 'Johannes';
+
+  function checkForSeceretCode(event){
+    if(event.key.length === 1){
+      keysPressed.push(event.key);
+    }else{
+      return;
+    }
+
+    if(lastSequense.includes(seceretKey)){
+      cornify_add();
+    }
+  }
+
 </script>
 </body>
 </html>
