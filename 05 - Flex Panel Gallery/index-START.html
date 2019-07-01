@@ -26,6 +26,7 @@
     .panels {
       min-height: 100vh;
       overflow: hidden;
+      display:flex;
     }
 
     .panel {
@@ -43,6 +44,11 @@
       font-size: 20px;
       background-size: cover;
       background-position: center;
+      flex: 1;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-flow: column;
     }
 
     .panel1 { background-image:url(https://source.unsplash.com/gYl-UtwNg_I/1500x1500); }
@@ -51,11 +57,14 @@
     .panel4 { background-image:url(https://source.unsplash.com/ITjiVXcwVng/1500x1500); }
     .panel5 { background-image:url(https://source.unsplash.com/3MNzGlQM7qs/1500x1500); }
 
-    /* Flex Children */
+    /* Flex Items */
     .panel > * {
       margin: 0;
       width: 100%;
       transition: transform 0.5s;
+      border: 1px solid gold;
+      flex: 1 0 auto;
+      display: flex;
     }
 
     .panel p {
@@ -63,6 +72,24 @@
       font-family: 'Amatic SC', cursive;
       text-shadow: 0 0 4px rgba(0, 0, 0, 0.72), 0 0 14px rgba(0, 0, 0, 0.45);
       font-size: 2em;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .panel > *:first-child{
+      transform:translateY(-100%);
+    }
+
+    .panel > *:last-child{
+      transform: translateY(100%);
+    }
+
+    .panel.open-active > *:first-child{
+      transform: translateY(0);
+    }
+
+    .panel.open-active > *:last-child{
+      transform: translateY(0);
     }
     
     .panel p:nth-child(2) {
@@ -70,6 +97,7 @@
     }
 
     .panel.open {
+      flex: 5;
       font-size: 40px;
     }
 
@@ -105,6 +133,21 @@
   </div>
 
   <script>
+    const panels = document.querySelectorAll('.panel'); 
+
+    function toggleOpen(){
+      this.classList.toggle('open');
+    }
+
+    function toggleActive(e){
+      if(e.propertyName.includes('flex')){
+        this.classList.toggle('open-active');
+      }
+    }
+
+    panels.forEach(panel => panel.addEventListener('click', toggleOpen));
+    panels.forEach(panel => panel.addEventListener('transitionend', toggleActive));
+
 
   </script>
 
