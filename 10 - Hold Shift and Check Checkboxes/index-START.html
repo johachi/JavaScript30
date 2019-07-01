@@ -95,7 +95,38 @@
     </div>
   </div>
 
-<script>
-</script>
+  <script>
+    const checkBoxes = document.querySelectorAll('.inbox input[type="checkbox"]')
+    let lastChecked = checkBoxes[0];
+    
+    checkBoxes.forEach((checkBox) => {
+      checkBox.addEventListener('click', handleClick);
+    });
+
+    function handleClick(event){
+      if(event.shiftKey === true && this.checked === true){
+        checkBoxesBetween(this, lastChecked);
+      }
+      
+      lastChecked = this;
+    }
+
+    function checkBoxesBetween(start, end){
+      let betweenBoxes = false;
+
+      checkBoxes.forEach((checkBox) => {
+        if(checkBox === start || checkBox === end){
+          betweenBoxes = !betweenBoxes;
+        }
+
+        if(betweenBoxes){
+          checkBox.checked = true;
+        }
+
+      });
+    }
+
+
+  </script>
 </body>
 </html>
